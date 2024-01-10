@@ -17,12 +17,12 @@ async fn main() -> std::io::Result<()> {
 #[post("/hv_formula")]
 async fn haversine_internal(req_body: web::Json<Coordinates>) -> Result<String, actix_web::http::Error> {
     let start_point = Point{
-        lat: req_body.lat_start,
-        lon: req_body.lon_start
+        lat: if req_body.lat_start != 0.0 {req_body.lat_start} else {1.0},
+        lon: if req_body.lon_start != 0.0 {req_body.lon_start} else {1.0}
     };
     let end_point = Point{
-        lat: req_body.lat_end,
-        lon: req_body.lon_end
+        lat: if req_body.lat_end != 0.0 {req_body.lat_end} else {1.0},
+        lon: if req_body.lon_end != 0.0 {req_body.lon_end} else {1.0}
     };
 
 
